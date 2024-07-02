@@ -119,16 +119,20 @@ def extract_problem_details(problem_url):
             for span in spans:
                 span_texts.append(span.text)
             concatenated_text = " ".join(span_texts)
-            code=concatenated_text
-            problem_solution[lan]=code
-    print(problem_solution)
+            code=concatenated_text.strip()
+            if lan:
+                if lan in problem_solution:
+                    problem_solution[lan]+=code
+                else:
+                    problem_solution[lan]=code
+            else:
+                continue
     return problem_solution
 
 # Fetch and parse the main problems page
 main_page_content = fetch_page(url)
 if main_page_content:
     problem_links = extract_links(main_page_content)
-    problem_links=[problem_links[0],problem_links[1]]
     for link in problem_links:
         problem_details = extract_problem_details(link)
         if problem_details:
