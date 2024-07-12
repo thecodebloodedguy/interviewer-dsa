@@ -133,11 +133,13 @@ def extract_problem_details(problem_url):
 main_page_content = fetch_page(url)
 if main_page_content:
     problem_links = extract_links(main_page_content)
+    problrm_links=problem_links[455:]
     for link in problem_links:
         problem_details = extract_problem_details(link)
         if problem_details:
             with open('output.json', 'a') as f:
                 json.dump(problem_details, f)  # Write dictionary as JSON
                 f.write(',')
+        print(f'Done for{link}')
     
 driver.quit()

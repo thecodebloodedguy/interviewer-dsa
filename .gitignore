@@ -1,0 +1,6 @@
+.venv
+.env
+.hypothesis
+*.json
+*.txt
+*.pkl
